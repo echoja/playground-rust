@@ -2,7 +2,7 @@
 // ==================================
 
 // We continue to work on our `BigInt`, so we start by importing what we already established.
-use part05::BigInt;
+use super::part05::BigInt;
 
 // With `BigInt` being about numbers, we should be able to write a version of `vec_min`
 // that computes the minimum of a list of `BigInt`. First, we have to write `min` for `BigInt`.
@@ -36,9 +36,8 @@ fn vec_min(v: &Vec<BigInt>) -> Option<BigInt> {
 
 // ## `Copy` types
 
-use part02::{SomethingOrNothing,Something,Nothing};
+use super::part02::{Nothing, Something, SomethingOrNothing};
 impl<T: Copy> Copy for SomethingOrNothing<T> {}
-
 
 // ## Lifetimes
 
@@ -64,5 +63,3 @@ fn rust_foo(mut v: Vec<i32>) -> i32 {
     /* v.push(42); */
     *first.unwrap()
 }
-
-

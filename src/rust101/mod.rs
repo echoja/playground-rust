@@ -6,25 +6,23 @@
 // tutorial.
 
 // Only the files imported here will be compiled.
-mod part00;
-mod part01;
-mod part02;
-mod part03;
-mod part04;
-mod part05;
-mod part06;
-mod part07;
-mod part08;
-mod part09;
-mod part10;
-mod part11;
-mod part12;
-mod part13;
-mod part14;
-mod part15;
-mod part16;
+pub mod part00;
+pub mod part01;
+pub mod part02;
+pub mod part03;
+pub mod part04;
+pub mod part05;
+pub mod part06;
+pub mod part07;
+pub mod part08;
+pub mod part09;
+pub mod part10;
+pub mod part11;
+pub mod part12;
+pub mod part13;
+pub mod part14;
+pub mod part15;
+pub mod part16;
 
-// This decides which part is actually run.
-fn main() {
-   part00::main();
-}
+
+
