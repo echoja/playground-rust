@@ -30,4 +30,7 @@ pub mod part14;
 pub mod part15;
 pub mod part16;
 
-pub mod part00_practice;
+pub mod part00_exercise;
+pub mod part03_exercise;
+pub mod part05_exercise;
+pub mod part06_exercise;
