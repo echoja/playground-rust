@@ -1,5 +1,5 @@
 [workspace]
-members = [ "actix-gcd",
+members = [ "actix-gcd", "mandelbrot",
     "simple",
     # 여기에 더 많은 크레이트를 추가할 수 있습니다.
 ]
