@@ -79,7 +79,7 @@ impl<'a, 'b> ops::Add<&'a BigInt> for &'b BigInt {
 // a submodule as follows.
 #[cfg(test)]
 mod tests {
-	use rust101::part05::BigInt;
+	use super::BigInt;
 
 	/*#[test]*/
 	fn test_add() {

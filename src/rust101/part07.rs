@@ -24,7 +24,14 @@ pub fn vec_min<T: Minimum>(v: &Vec<T>) -> Option<&T> {
 // exercise 06.1. You should *not* make any copies of `BigInt`!
 impl Minimum for BigInt {
 	fn min<'a>(&'a self, other: &'a Self) -> &'a Self {
-		unimplemented!()
+		for i in 0..self.data.len() {
+			if self.data[i] < other.data[i] {
+				return self;
+			} else if self.data[i] > other.data[i] {
+				return other;
+			}
+		}
+		self
 	}
 }
 
@@ -34,7 +41,16 @@ impl PartialEq for BigInt {
 	#[inline]
 	fn eq(&self, other: &BigInt) -> bool {
 		debug_assert!(self.test_invariant() && other.test_invariant());
-		unimplemented!()
+		if self.data.len() != other.data.len() {
+			false
+		} else {
+			for i in 0..self.data.len() {
+				if self.data[i] != other.data[i] {
+					return false;
+				}
+			}
+			true
+		}
 	}
 }
 
@@ -59,7 +75,7 @@ fn test_min() {
 	let b2 = BigInt::new(42);
 	let b3 = BigInt::from_vec(vec![0, 1]);
 
-	unimplemented!()
+	assert_eq!(b1.min(&b2), &b1);
 }
 // Now run `cargo test` to execute the test. If you implemented `min` correctly, it should all work!
 

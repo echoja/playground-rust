@@ -11,9 +11,9 @@ pub struct BigInt {
 impl BigInt {
 	pub fn new(x: u64) -> Self {
 		if x == 0 {
-			unimplemented!()
+			BigInt { data: vec![] }
 		} else {
-			unimplemented!()
+			BigInt { data: vec![x] }
 		}
 	}
 
@@ -21,7 +21,7 @@ impl BigInt {
 		if self.data.len() == 0 {
 			true
 		} else {
-			unimplemented!()
+			self.data[self.data.len() - 1] != 0
 		}
 	}
 
@@ -35,7 +35,7 @@ impl BigInt {
 	//
 	// *Hint*: You can use `pop` to remove the last element of a vector.
 	pub fn from_vec(mut v: Vec<u64>) -> Self {
-		unimplemented!()
+		BigInt { data: v }
 	}
 }
 

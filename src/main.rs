@@ -1,3 +1,4 @@
+mod gcd;
 mod rust101;
 
 // This decides which part is actually run.
