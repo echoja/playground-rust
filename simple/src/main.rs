@@ -1,7 +1,7 @@
+use std::{error::Error, ops::Add};
+
 mod gcd;
 mod rust101;
-
-use std::env;
 
 #[derive(Clone)]
 struct Point {
@@ -56,11 +56,47 @@ fn print_number(x: i32) {
 // 	let mut b = &a;
 // }
 
-fn main() {
-	let a;
-	{
-		let b = 10;
-		a = &b;
-		println!("a: {}", a);
+// struct S<'a> {
+// 	x: &'a i32,
+// 	y: &'a i32,
+// }
+
+// fn main() {
+// 	let x = 10;
+// 	let r;
+// 	{
+// 		let y = 20;
+// 		{
+// 			let s = S { x: &x, y: &y };
+// 			r = s.x;
+// 		}
+// 	}
+// 	// println!("r: {}", r);
+// }
+
+#[derive(Debug)]
+struct Person {
+	age: u8,
+}
+
+impl Add<u8> for Person {
+	type Output = Person;
+
+	fn add(self, rhs: u8) -> Self::Output {
+		Person {
+			age: self.age + rhs,
+		}
 	}
+}
+
+fn main() {
+	let person = Person { age: 10 };
+	let person = person + 20;
+	println!("person: {:?}", person);
+}
+
+fn say_hello(out: &mut dyn std::io::Write) -> std::io::Result<()> {
+	out.write_all(b"hello world\n")?;
+	out.flush()?;
+	Ok(())
 }
