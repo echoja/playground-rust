@@ -1,4 +1,6 @@
-use std::{error::Error, ops::Add};
+use std::fmt::Display;
+use std::ops::Mul;
+use std::{error::Error, fmt::Debug, hash::Hash, ops::Add};
 
 mod gcd;
 mod rust101;
@@ -74,29 +76,76 @@ fn print_number(x: i32) {
 // 	// println!("r: {}", r);
 // }
 
-#[derive(Debug)]
-struct Person {
-	age: u8,
+trait Foo<T> {
+	fn foo(&self) -> T;
 }
 
-impl Add<u8> for Person {
-	type Output = Person;
+impl Foo<i32> for i32 {
+	fn foo(&self) -> i32 {
+		println!("Foo for i32");
+		*self
+	}
+}
 
-	fn add(self, rhs: u8) -> Self::Output {
-		Person {
-			age: self.age + rhs,
-		}
+// struct Person {
+// 	age: u8,
+// }
+
+// impl Display for Person {
+// 	fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+// 		write!(f, "person with age {}", self.age)
+// 	}
+// }
+
+trait Barkable
+where
+	Self: Display,
+{
+	fn bark(&self);
+}
+
+impl<T: Display> Barkable for T {
+	fn bark(&self) {
+		println!("I'm {}, and I'm barking!!", self);
 	}
 }
 
 fn main() {
-	let person = Person { age: 10 };
-	let person = person + 20;
-	println!("person: {:?}", person);
+	123.bark();
+	3.0.bark();
+	"hello".bark();
+	let m = Message::Quit;
+	m.bark();
+
+	let p = Point { x: 1.0, y: 2.0 };
+
+	let a = Some(5);
+	if let Some(x) = &a {
+		println!("x is {}", x);
+	}
+
+	match &p {
+		Point { x, .. } => println!("x is not ref {}", x),
+	}
 }
 
-fn say_hello(out: &mut dyn std::io::Write) -> std::io::Result<()> {
-	out.write_all(b"hello world\n")?;
-	out.flush()?;
-	Ok(())
+fn foo<N: Mul<i32, Output = N>>(x: N) -> N {
+	x * 100
+}
+
+#[derive(Debug)]
+enum Message {
+	Quit,
+	Echo,
+	Move,
+}
+
+impl Display for Message {
+	fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+		match self {
+			Message::Quit => write!(f, "Quit"),
+			Message::Echo => write!(f, "Echo"),
+			Message::Move => write!(f, "Move"),
+		}
+	}
 }
