@@ -127,6 +127,9 @@ fn main() {
 	match &p {
 		Point { x, .. } => println!("x is not ref {}", x),
 	}
+	println!("1 == 2 = {}", 1 == 2);
+	println!("1.eq(&2) = {}", 1.eq(&2));
+	println!("{}", "abc".to_string() == "bcd".to_string());
 }
 
 fn foo<N: Mul<i32, Output = N>>(x: N) -> N {
