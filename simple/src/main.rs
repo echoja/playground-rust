@@ -2,8 +2,6 @@ use std::collections::{binary_heap, btree_map, btree_set, BinaryHeap, HashMap, H
 
 fn main() {
 	println!("Hello, world!");
-	test_collection_from_iter();
-	test_collection_access();
 }
 
 #[test]
@@ -80,4 +78,37 @@ fn test_custom_set() {
 		age: 20,
 	});
 	println!("{:?}", set);
+}
+
+#[test]
+fn test_two_sum() {
+	struct Solution;
+
+	impl Solution {
+		pub fn two_sum(nums: Vec<i32>, target: i32) -> Vec<i32> {
+			let mut map = HashMap::new();
+			for (i, &num) in nums.iter().enumerate() {
+				if let Some(&j) = map.get(&(target - num)) {
+					return vec![j as i32, i as i32];
+				}
+				map.insert(num, i);
+			}
+			vec![]
+		}
+	}
+
+	let nums = vec![2, 7, 11, 15];
+	let target = 9;
+	let result = Solution::two_sum(nums, target);
+	assert_eq!(result, vec![0, 1]);
+
+	let nums = vec![3, 2, 4];
+	let target = 6;
+	let result = Solution::two_sum(nums, target);
+	assert_eq!(result, vec![1, 2]);
+
+	let nums = vec![3, 3];
+	let target = 6;
+	let result = Solution::two_sum(nums, target);
+	assert_eq!(result, vec![0, 1]);
 }
