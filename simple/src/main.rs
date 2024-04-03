@@ -112,3 +112,71 @@ fn test_two_sum() {
 	let result = Solution::two_sum(nums, target);
 	assert_eq!(result, vec![0, 1]);
 }
+
+macro_rules! my_vec {
+	( $( $x:expr ),* ) => {
+		{
+			let mut temp_vec = Vec::new();
+			$(
+				temp_vec.push($x);
+			)*
+			temp_vec
+		}
+	};
+	( $( $x:expr ),+ ,) => {
+		my_vec![$($x),+]
+	};
+
+	( $( $x:ident )comma+) => {
+		my_vec![$($x),+]
+	};
+}
+
+#[test]
+fn test_my_vec() {
+	let v = my_vec![1, 2, 3];
+	assert_eq!(v, vec![1, 2, 3]);
+
+	let v2 = my_vec![1, 2, 3,];
+	assert_eq!(v2, vec![1, 2, 3]);
+
+	let a = 1;
+	let b = 2;
+	let c = 3;
+	let v3 = my_vec![a comma b comma c];
+	assert_eq!(v3, vec![1, 2, 3]);
+}
+
+macro_rules! mac_test1 {
+	( $x:expr) => {
+		$x
+	};
+	( myname is $x:expr) => {
+		$x
+	};
+}
+
+#[test]
+fn test_macro() {
+	let a = 10;
+	let b = mac_test1!(a);
+	assert_eq!(b, 10);
+
+	let c = mac_test1!(myname is a);
+	assert_eq!(c, 10);
+}
+
+macro_rules! complain {
+	( $x:expr ) => {{
+		println!("Oh no! {}", $x);
+	}};
+	(user : $userid:tt, $msg:expr) => {{
+		println!("User {} says: {}", $userid, $msg);
+	}};
+}
+
+#[test]
+fn test_macro2() {
+	complain!("I'm sad");
+	complain!(user: "kim", "I'm happy");
+}
